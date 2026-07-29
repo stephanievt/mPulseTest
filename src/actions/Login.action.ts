@@ -2,14 +2,18 @@
 import { Page } from '@playwright/test';
 import { LoginComponent } from '../UiComponents/Login.comp';
 import { DashMemberInfoCard } from '../UiComponents/DashMemberInfoCard.comp';
-import { User } from '../pojo/user';
+import { User } from '../model/User';
+import {test} from '../fixtures/fixtures';
 
-export class LoginBehavior {
+export class LoginAction {
   constructor(private page: Page, private user: User) {}
 
   async loginAs(user: { username: string; password: string; firstName?: string; lastName?: string }) {
-    const loginComponent = new LoginComponent(this.page);
-    await loginComponent.login(user.username, user.password);
+    await test.step('step name', async () => {
+      const loginComponent = new LoginComponent(this.page);
+      await loginComponent.login(user.username, user.password);      
+    });
+    
   }
 
   async expectDashboardWelcome(firstName: string, lastName: string) {

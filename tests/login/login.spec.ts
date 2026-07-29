@@ -1,28 +1,30 @@
-import { test, expect } from '@playwright/test';
-import { LoginBehavior } from '../capability/Login.capability';
+import { expect } from '@playwright/test';
+import { test } from '../../src/fixtures/fixtures';
 import dotenv from 'dotenv';
 import { getEnv } from '../env';
-import { User } from '../pojo/user';
-import { NavigationBehavior } from '../capability/Navigation.capability';
+import { User } from '../../src/model/User';
+import {MemberPersona} from '../../src/persona/Member.persona';
+
 
 dotenv.config({ path: '.env.qa' });
+const testUser : User = {
+  username: 'hjones2',
+  password: getEnv('QA_MEMBER_PASSWORD'),
+  firstName: 'Harry',
+  lastName: 'Jones',
+  role: 'member'
+}
 
-const testUser = new User('hjones2', getEnv('QA_MEMBER_PASSWORD'), 'stephanie.goulet@mpulse.com', 'Harry', 'Jones' );
+
 
 test('Login with valid credentials', async ({ page }) => {
-  const behavior = new NavigationBehavior(page);
-  const loginBehavior = new LoginBehavior(page, testUser);
+  
+  const memberPersona = new MemberPersona(page, testUser);
+  await memberPersona.launchApplication();
+  await memberPersona.login();
 
-  await test.step('Given the user is on the login page', async () => {
-    await behavior.loadApp();
-  });
 
-  await test.step('When the user enters valid credentials', async () => {
-    await loginBehavior.loginAs({
-      username: 'hjones2',
-      password: getEnv('QA_MEMBER_PASSWORD')
-    });
-  });
+
 
   await test.step('Then the user is welcomed on the dashboard', async () => {
     await expect(page).toHaveTitle('Member Portal | BrandHealth');

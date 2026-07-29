@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-import { step } from "../../utils/step";
+import { step } from "../utils/step";
 
 export class LoginComponent {
   private readonly username: Locator;
@@ -14,7 +14,6 @@ export class LoginComponent {
 
    
 
-  @step()
   async login(user: string, pass: string) {
     await this.username.fill(user);
     await this.password.fill(pass);

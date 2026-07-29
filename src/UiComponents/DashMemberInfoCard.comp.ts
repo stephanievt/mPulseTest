@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-import { User } from "../pojo/user";
+import { User } from "../model/User";
 
 export class DashMemberInfoCard {
     
