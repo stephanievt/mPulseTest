@@ -1,22 +1,25 @@
 // user-behavior/login.behavior.ts
-import { Page } from '@playwright/test';
+import { Page, test } from '@playwright/test';
 import { LoginComponent } from '../UiComponents/Login.comp';
 import { DashMemberInfoCard } from '../UiComponents/DashMemberInfoCard.comp';
 import { User } from '../model/User';
-import {test} from '../fixtures/fixtures';
+
 
 export class LoginAction {
   constructor(private page: Page, private user: User) {}
 
-  async loginAs(user: { username: string; password: string; firstName?: string; lastName?: string }) {
-    await test.step('step name', async () => {
+  async login() : Promise<void> {
+    await test.step('Username and password entered and button clicked.', async () => {
       const loginComponent = new LoginComponent(this.page);
-      await loginComponent.login(user.username, user.password);      
+      await loginComponent.username.fill(this.user.username);
+      await loginComponent.password.fill(this.user.password);
+      await loginComponent.loginBtn.click();
+
     });
     
   }
 
-  async expectDashboardWelcome(firstName: string, lastName: string) {
+  async expectDashboardWelcome(firstName: string, lastName: string) : Promise<void>  {
     const dashMemberInfoCard = new DashMemberInfoCard(this.page);
     await dashMemberInfoCard.memberInfoCardHeader.waitFor({ state: 'visible' });
   }

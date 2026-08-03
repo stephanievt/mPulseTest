@@ -1,6 +1,4 @@
-import { Page } from '@playwright/test';
-import { test } from '../fixtures/fixtures';
-import { User } from '../model/User';
+import { Page, test } from '@playwright/test';
 import { NavigationAction } from '../actions/Navigation.action';
 import { LoginAction } from '../actions/Login.action';
 

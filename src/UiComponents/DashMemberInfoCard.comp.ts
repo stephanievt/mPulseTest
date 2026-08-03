@@ -11,5 +11,4 @@ export class DashMemberInfoCard {
         this.memberInfoCardHeader = this.memberInfoCard.locator('h1');
     }
 
-    
 }

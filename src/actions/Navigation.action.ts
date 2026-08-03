@@ -1,12 +1,13 @@
-import { Page } from '@playwright/test';
-import {test} from '../fixtures/fixtures'
+import { Page, test } from '@playwright/test';
+
 
 export class NavigationAction {
   constructor(private readonly page: Page) {}
 
-  async loadApp() {
+  async loadApp() : Promise<void>{
     await test.step('step name', async () => {
       await this.page.goto('');
+      
     });
     
   }
