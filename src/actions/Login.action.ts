@@ -19,8 +19,5 @@ export class LoginAction {
     
   }
 
-  async expectDashboardWelcome(firstName: string, lastName: string) : Promise<void>  {
-    const dashMemberInfoCard = new DashMemberInfoCard(this.page);
-    await dashMemberInfoCard.memberInfoCardHeader.waitFor({ state: 'visible' });
-  }
+
 }

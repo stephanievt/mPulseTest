@@ -5,5 +5,6 @@ export interface User{
     firstName: string;
     lastName: string;
     role: UserRole;   
+    memberNumber: string; //TODO: This likely needs to go elsewhere in a different model that inherits...
 }
 

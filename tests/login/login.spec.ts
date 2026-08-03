@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 import { getEnv } from '../env';
 import { User } from '../../src/model/User';
 import { Given, When, Then } from '../../src/utils/gherkin';
-import { LoginAction } from '../../src/actions/Login.action';
-import { NavigationAction } from '../../src/actions/Navigation.action';
+import { DashboardQuestion } from '../../src/questions/Dashboard.questions';
+import { MemberPersona } from '../../src/persona/Member.persona';
 
 dotenv.config({ path: '.env.qa' });
 
@@ -13,21 +13,23 @@ const testUser : User = {
   password: getEnv('QA_MEMBER_PASSWORD'),
   firstName: 'Harry',
   lastName: 'Jones',
-  role: 'member'
-  }
+  role: 'member',
+  memberNumber: '8888888800-RP'
+};
 
 
 test('Login with valid credentials', async ({ page }) => {
-  
-  const navigationAction = new NavigationAction(page);
-  const loginAction = new LoginAction(page, testUser);
-  await Given('the application is launched', () => navigationAction.loadApp());
-  
-  await When('the user logs in with valid credentials', () => loginAction.login());
 
-  await test.step('Then the user is welcomed on the dashboard', async () => {
-    await expect(page).toHaveTitle('Member Portal | BrandHealth');
+  const memberPersona = new MemberPersona(page, testUser);
+  const dashboardQuestions = new DashboardQuestion(page);
+
+  await Given('the application is launched', () => memberPersona.launchApplication());
+  await When('the user logs in with valid credentials', () => memberPersona.login());
+  await Then('the user sees their information on the dashboard', async () => {
+    await expect(await dashboardQuestions.doesMembersInfoCardContainName(testUser)).toBe(true);
+    await expect(await dashboardQuestions.doesMemberInfoCardContainMemberNumber(testUser)).toBe(true);  
   });
+  
 
   
 });
