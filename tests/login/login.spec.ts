@@ -26,8 +26,10 @@ test('Login with valid credentials', async ({ page }) => {
   await Given('the application is launched', () => memberPersona.launchApplication());
   await When('the user logs in with valid credentials', () => memberPersona.login());
   await Then('the user sees their information on the dashboard', async () => {
-    await expect(await dashboardQuestions.doesMembersInfoCardContainName(testUser)).toBe(true);
-    await expect(await dashboardQuestions.doesMemberInfoCardContainMemberNumber(testUser)).toBe(true);  
+  //TODO: This is an example where it should a test failure not a timeout.
+  expect(await dashboardQuestions.doesMembersInfoCardContainName(testUser)).toBe(true);
+  expect(await dashboardQuestions.doesMemberInfoCardContainMemberNumber(testUser)).toBe(true);  
+
   });
   
 
