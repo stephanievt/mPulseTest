@@ -3,8 +3,9 @@ import dotenv from 'dotenv';
 import { getEnv } from '../env';
 import { User } from '../../DataModel/User';
 import { Given, When, Then } from '../../Utils/gherkin';
-import { DashboardQuestion } from '../../src/questions/Dashboard.questions';
+
 import { MemberPersona } from '../../Persona/Member.persona';
+import { DashboardQuestion } from '../../DomainServices/Dashboard.questions';
 
 dotenv.config({ path: '.env.qa' });
 
