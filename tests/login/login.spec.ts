@@ -1,31 +1,39 @@
-import { test, expect } from '@playwright/test';
-import { LoginBehavior } from '../capability/Login.capability';
+import test, { expect } from '@playwright/test';
 import dotenv from 'dotenv';
 import { getEnv } from '../env';
-import { User } from '../pojo/user';
-import { NavigationBehavior } from '../capability/Navigation.capability';
+import { User } from '../../DataModel/User';
+import { Given, When, Then } from '../../Utils/gherkin';
+
+import { MemberPersona } from '../../Persona/Member.persona';
+import { DashboardQuestion } from '../../DomainServices/Dashboard.questions';
 
 dotenv.config({ path: '.env.qa' });
 
-const testUser = new User('hjones2', getEnv('QA_MEMBER_PASSWORD'), 'stephanie.goulet@mpulse.com', 'Harry', 'Jones' );
+const testUser : User = {
+  username: 'hjones2',
+  password: getEnv('QA_MEMBER_PASSWORD'),
+  firstName: 'Harry',
+  lastName: 'Jones',
+  role: 'member',
+  memberNumber: '8888888800-RP'
+};
+
 
 test('Login with valid credentials', async ({ page }) => {
-  const behavior = new NavigationBehavior(page);
-  const loginBehavior = new LoginBehavior(page, testUser);
 
-  await test.step('Given the user is on the login page', async () => {
-    await behavior.loadApp();
-  });
+  const memberPersona = new MemberPersona(page, testUser);
+  const dashboardQuestions = new DashboardQuestion(page);
 
-  await test.step('When the user enters valid credentials', async () => {
-    await loginBehavior.loginAs({
-      username: 'hjones2',
-      password: getEnv('QA_MEMBER_PASSWORD')
-    });
-  });
+  await Given('the application is launched', () => memberPersona.launchApplication());
+  await When('the user logs in with valid credentials', () => memberPersona.login());
+  await Then('the user sees their information on the dashboard', async () => {
+  //TODO: This is an example where it should a test failure not a timeout.
+  expect(await dashboardQuestions.doesMembersInfoCardContainName(testUser)).toBe(true);
+  expect(await dashboardQuestions.doesMemberInfoCardContainMemberNumber(testUser)).toBe(true);  
 
-  await test.step('Then the user is welcomed on the dashboard', async () => {
-    await expect(page).toHaveTitle('Member Portal | BrandHealth');
   });
+  
+
+  
 });
 

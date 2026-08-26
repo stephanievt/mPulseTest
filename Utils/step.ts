@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test } from "../fixtures/Fixtures";
 
 /**
  * Decorator function for wrapping POM methods in a test.step.
