@@ -1,7 +1,7 @@
 import { Page, test } from '@playwright/test';
-import { NavigationAction } from '../actions/Navigation.action';
-import { LoginAction } from '../actions/Login.action';
-import { User } from '../model/User';
+import { NavigationAction } from '../DomainServices/Navigation.action';
+import { LoginAction } from '../DomainServices/Login.action';
+import { User } from '../DataModel/User';
 
 export abstract class UserPersona {
   protected readonly navigation: NavigationAction;

@@ -1,5 +1,4 @@
 import { APIRequestContext } from "@playwright/test";
-import { getUrl } from "./urlManager";
 
 export interface AuthResponse {
   success: boolean;

@@ -1,7 +1,11 @@
 // user-behavior/login.behavior.ts
 import { Page, test } from '@playwright/test';
 import { LoginComponent } from '../UiComponents/Login.comp';
-import { User } from '../model/User';
+
+type User = {
+  username: string;
+  password: string;
+};
 
 
 export class LoginAction {

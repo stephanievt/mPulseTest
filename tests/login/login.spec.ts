@@ -1,10 +1,10 @@
 import test, { expect } from '@playwright/test';
 import dotenv from 'dotenv';
 import { getEnv } from '../env';
-import { User } from '../../src/model/User';
-import { Given, When, Then } from '../../src/utils/gherkin';
+import { User } from '../../DataModel/User';
+import { Given, When, Then } from '../../Utils/gherkin';
 import { DashboardQuestion } from '../../src/questions/Dashboard.questions';
-import { MemberPersona } from '../../src/persona/Member.persona';
+import { MemberPersona } from '../../Persona/Member.persona';
 
 dotenv.config({ path: '.env.qa' });
 
