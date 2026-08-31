@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 import { DashMemberInfoCard } from '../UiComponents/DashMemberInfoCard.comp';
-import { MemberInfo, User } from '../DataModel/User';
+import { User } from '../DataModel/User';
 import { Question } from './Question';
 
 export class DashboardQuestion extends Question {
@@ -11,7 +11,7 @@ export class DashboardQuestion extends Question {
     this.card = new DashMemberInfoCard(page);
   }
 
-  async doesMembersInfoCardContainName(user: MemberInfo): Promise<boolean> {
+  async doesMembersInfoCardContainName(user: User): Promise<boolean> {
     if (!(await this.tryWaitFor(this.card.memberInfoCard))) {
       return false;
     }

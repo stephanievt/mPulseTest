@@ -1,9 +1,13 @@
 import test, { expect } from '@playwright/test';
 import dotenv from 'dotenv';
 import { getEnv } from '../env';
-import { Given, When, Then } from '../../Utils/gherkin';
+import { Given, When, Then } from '../../Framework/Gherkin';
 import { NavigationAction } from '../../DomainServices/Navigation.Domain';
-import type { ProviderSearchCriteria } from '../../DataModel/ProviderSearchCriteria.ts';
+import { ProviderDirectoryDomain } from '../../DomainServices/ProviderDirectory.domain';
+
+
+import type { ProviderSearchCriteria } from '../../DataModel/ProviderSearchCriteria';
+import { ProviderSearchPageComponent } from '../../UiComponents/ProviderSearchPage.comp';
 
 
 
@@ -24,7 +28,14 @@ test.beforeEach(async ({ page }) => {
 });
 
 
-test('Provider Basic', async ({ page }) => {
-    const navigationActions = new NavigationAction(page, getEnv('BRANDHEALTH_ORG_URL'));
-    await Given('the application is launched', () => navigationActions.loadApp());
+test('Provider Search Location One', async ({ page }) => {
+    const navigationActions = new NavigationAction(page, url);
+    const providerDirectory = new ProviderDirectoryDomain(page);
+
+    await Given('Navigation to Provider Directory', () => navigationActions.ProviderDirectory());
+    
+    await When('I search for a provider with the specified location', () =>
+        providerDirectory.searchProvider(searchParams)
+    );
+
 });

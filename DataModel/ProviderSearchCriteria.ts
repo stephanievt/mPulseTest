@@ -5,8 +5,8 @@ export type LocationSearchType =
 
 export interface ProviderSearchCriteria {
     locationSearchType: LocationSearchType;
-    distanceMiles?: number;
-    zipCode?: string;
+    distanceMiles: number;
+    zipCode: string;
     useCurrentLocation: boolean;
 }
 

@@ -8,8 +8,8 @@ export class DashMemberInfoCard {
 
     constructor(private readonly page: Page) {
         this.memberInfoCard = page.locator('div.cc-home-memberinfo');
-        this.memberInfoCardHeader = this.memberInfoCard.getByRole('heading', { level: 1 });
-        this.memberInfoCardMemberNumber = this.memberInfoCard.getByRole('heading', { level: 2 });
+        this.memberInfoCardHeader = this.memberInfoCard.getByRole('heading', { level: 1 }); // LOC: Fragile locator
+        this.memberInfoCardMemberNumber = this.memberInfoCard.getByRole('heading', { level: 2 }); // LOC: Fragile locator
     }
 
 }

@@ -23,8 +23,8 @@ export class ProviderSearchPageComponent {
 		this.noPreferenceRadio = page.getByRole('radio', { name: 'No preference', exact: true });
 		this.withinRadio = page.getByRole('radio', { name: 'Within', exact: true });
 		this.onlyInsideRadio = page.getByRole('radio', { name: 'Only inside', exact: true });
-		this.distanceMilesSelect = page.getByRole('combobox').first();
-		this.zipCodeInput = page.getByRole('textbox', { name: 'Zip Code', exact: true });
+		this.distanceMilesSelect = page.getByRole('combobox').first(); // LOC: This is a bad locator given by AI
+		this.zipCodeInput = page.locator('#practitionerZip');
 		this.useCurrentLocationCheckbox = page.getByRole('checkbox', {
 			name: 'Use current location',
 			exact: true,
@@ -33,7 +33,7 @@ export class ProviderSearchPageComponent {
 		this.stateSelect = page.getByRole('combobox', { name: 'State', exact: true });
 		this.addressInput = page.getByRole('textbox', { name: 'Address', exact: true });
 		this.countySelect = page.getByRole('combobox', { name: 'County', exact: true });
-		this.findProviderButton = page.getByRole('button').locator("#submitProvSearch");
+		this.findProviderButton = page.locator("#submitProvSearch");
 	}
 
 
