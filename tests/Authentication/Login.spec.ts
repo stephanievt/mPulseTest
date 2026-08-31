@@ -4,8 +4,10 @@ import { getEnv } from '../env';
 import { User } from '../../DataModel/User';
 import { Given, When, Then } from '../../Utils/gherkin';
 
-import { MemberPersona } from '../../Persona/Member.persona';
-import { DashboardQuestion } from '../../DomainServices/Dashboard.questions';
+
+import { DashboardQuestion } from '../../DomainServices/Dashboard.Domain';
+import { NavigationAction } from '../../DomainServices/Navigation.Domain';
+import { LoginAction } from '../../DomainServices/Login.Domain';
 
 dotenv.config({ path: '.env.qa' });
 
@@ -15,19 +17,19 @@ const testUser : User = {
   firstName: 'Harry',
   lastName: 'Jones',
   role: 'member',
-  memberNumber: '8888888800-RP'
+  memberNumber: '8888888800-RP',
 };
 
 
 test('Login with valid credentials', async ({ page }) => {
 
-  const memberPersona = new MemberPersona(page, testUser);
   const dashboardQuestions = new DashboardQuestion(page);
+  const navigationActions = new NavigationAction(page, getEnv('QA_ORG_MEMBER_URL'));
+  const loginActions = new LoginAction(page, testUser);
 
-  await Given('the application is launched', () => memberPersona.launchApplication());
-  await When('the user logs in with valid credentials', () => memberPersona.login());
+  await Given('the application is launched', () => navigationActions.loadApp());
+  await When('the user logs in with valid credentials', () => loginActions.Login());
   await Then('the user sees their information on the dashboard', async () => {
-  //TODO: This is an example where it should a test failure not a timeout.
   expect(await dashboardQuestions.doesMembersInfoCardContainName(testUser)).toBe(true);
   expect(await dashboardQuestions.doesMemberInfoCardContainMemberNumber(testUser)).toBe(true);  
 
