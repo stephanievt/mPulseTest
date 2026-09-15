@@ -1,13 +1,10 @@
 // user-behavior/login.behavior.ts
 
 import test, { Page } from '@playwright/test';
-import { LoginComponent } from '../UiComponents/Login.comp';
-import { LoginCredentials } from '../DataModel/User';
+import { LoginComponent } from '../UiModel/Login.comp';
+import { User } from '../DataModel/User';
 
-export type User = {
-  username: string;
-  password: string;
-};
+
 export class LoginAction {
   constructor(private page: Page, private user: User) { }
 
@@ -29,13 +26,6 @@ export class LoginAction {
     });
   }
 
-
-  async ProviderDirectory(): Promise<void> {
-    await test.step('Provider Directory accessed.', async () => {
-      const loginComponent = new LoginComponent(this.page);
-      await loginComponent.providerDirectory.click();
-    });
-  }
 
 }
 

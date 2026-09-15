@@ -8,7 +8,9 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "types": ["node"]
+    "types": ["node"],
+    "strict": true
   },
-  "include": ["tests/**/*.ts", "playwright.config.ts", "src/**/*.ts", "UiComponents/Dashboard.comp.ts", "UiComponents/DashMemberInfoCard.comp.ts", "UiComponents/Login.comp.ts", "UiComponents/PageBanner.comp.ts", "DomainServices/Navigation.Domain.ts", "DataModel/User.ts", "Persona/Member.persona.ts", "Persona/User.persona.ts", "Utils/authHelper.ts", "Utils/dateUtils.ts", "Utils/env.ts", "Utils/gherkin.ts", "Utils/step.ts", "Utils/stringUtils.ts", "Utils/urlManager.ts"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "playwright-report", "test-results"]
 }
