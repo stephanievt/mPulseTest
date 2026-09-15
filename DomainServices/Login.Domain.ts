@@ -1,7 +1,7 @@
 // user-behavior/login.behavior.ts
 
 import test, { Page } from '@playwright/test';
-import { LoginComponent } from '../UiComponents/Login.comp';
+import { LoginComponent } from '../UiModel/Login.comp';
 import { User } from '../DataModel/User';
 
 
