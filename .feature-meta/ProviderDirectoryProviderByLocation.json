@@ -1,0 +1,5 @@
+{
+  "file": "C:\\Dev\\mPulseTest\\Tests\\ProviderDirectory\\ProviderDirectoryProviderByLocation.spec.ts",
+  "name": "Provider Directory by Provider Location Tests",
+  "description": "Tests of Provider Directory by LOCATION only with no other search criteria for provider or location provided."
+}

@@ -17,8 +17,7 @@ export class NavigationDomain {
     await narrate('Opened the Provider Directory page from the main navigation menu.');
     const loginComponent = new LoginComponent(this.page);
     await loginComponent.providerDirectory.click();
-    
-    //const providerSearchPage = new ProviderSearchPageComponent(this.page);
+        
   });
 }
 
